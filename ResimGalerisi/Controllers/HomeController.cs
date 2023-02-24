@@ -49,6 +49,26 @@ namespace ResimGalerisi.Controllers
             return View(vm);
         }
 
+        public IActionResult Sil(int id)
+        {
+            var resim = _db.Resimler.Find(id);
+            if(resim == null)
+            {
+
+                return NotFound();
+            }
+            string dosyaYolu = Path.Combine(_env.WebRootPath, "img", resim.DosyaAd);
+
+            if(System.IO.File.Exists(dosyaYolu))
+            {
+                System.IO.File.Delete(dosyaYolu);
+            }
+            _db.Remove(resim);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
+
+        }
+
         public IActionResult Privacy()
         {
             return View();

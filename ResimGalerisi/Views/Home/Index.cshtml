@@ -18,7 +18,7 @@
         <input asp-for="Dosya" class="form-control w-auto me-3" type="file">
         <label class="me-2">Başlık:</label>
         <input asp-for="Baslik" class="form-control w-auto me-3" type="text" placeholder="Başlık..">
-        <button class="btn btn-primary">Yükle</button>  
+        <button class="btn btn-primary">Yükle</button>
     </div>
 </form>
 
@@ -27,7 +27,18 @@
     {
         <div class="col-sm-2 text-center mb-3">
             <img src="~/img/@item.DosyaAd" alt="Resim" height="100" />
-            <h4>@item.Baslik</h4>
+            <div class="d-flex justify-content-between align-items-center mt-3">
+                <p class="h6">@item.Baslik</p>
+                <form method="post" asp-action="Sil" >
+                    <input type="hidden" name="ad" value="@item.DosyaAd"/>
+                    <button class="btn btn-sm btn-danger" >
+                       <i class="fa-solid fa-trash"></i>
+                    </button>
+
+                </form>
+
+            </div>
+
         </div>
     }
 </div>
